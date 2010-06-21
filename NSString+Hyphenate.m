@@ -139,7 +139,7 @@
             // Clean up
             free(hyphens);
             if (rep) {
-                for (i = 0; i < [self length]; i++) {
+                for (i = 0; i < wordLength; i++) {
                     if (rep[i]) free(rep[i]);
                 }
                 free(rep);
