@@ -108,7 +108,8 @@
         if (tokenType & kCFStringTokenizerTokenHasNonLettersMask) {
             [result appendString:token];
         } else {
-            wordLength = tokenRange.length;
+            char const* tokenChars = [[token lowercaseString] UTF8String];
+            wordLength = strlen(tokenChars);
             // This is the buffer size the algorithm needs.
             hyphens = (char*)malloc(wordLength + 5); // +5, see hypen.h 
             rep = NULL; // Will be allocated by the algorithm
@@ -117,8 +118,8 @@
 
             // rep, pos and cut are not currently used, but the simpler
             // hyphenation function is deprecated.
-            hnj_hyphen_hyphenate2(dict, [[token lowercaseString] UTF8String], 
-                                  wordLength, hyphens, NULL, &rep, &pos, &cut);
+            hnj_hyphen_hyphenate2(dict, tokenChars, wordLength, hyphens, 
+                                  NULL, &rep, &pos, &cut);
             
             NSUInteger loc = 0;
             NSUInteger len = 0;
