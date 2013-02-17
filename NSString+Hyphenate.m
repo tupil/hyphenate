@@ -133,8 +133,7 @@
                 }
             }
             if (loc < wordLength) {
-                [result appendString:
-                 [token substringWithRange:NSMakeRange(loc, wordLength - loc)]];
+                [result appendString:[token substringFromIndex:loc]];
             }
             
             // Clean up
